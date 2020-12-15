@@ -1,6 +1,12 @@
 import Head from "next/head";
+import Link from "next/link";
 
-import { Product, ProductRow, ProductColImage, ProductCol } from "../styles/Home";
+import {
+  Product,
+  ProductRow,
+  ProductColImage,
+  ProductCol,
+} from "../styles/Home";
 import products from "../products.json";
 import { fromImageToUrl } from "../utils/urls";
 
@@ -13,14 +19,18 @@ export default function Home() {
       </Head>
       {products.map((product) => (
         <Product key={product.name}>
-          <ProductRow>
-            <ProductColImage>
-              <img src={fromImageToUrl(product.image)} />
-            </ProductColImage>
-            <ProductCol>
-              {product.name} {product.price}
-            </ProductCol>
-          </ProductRow>
+          <Link href={`/products/${product.slug}`}>
+            <a>
+              <ProductRow>
+                <ProductColImage>
+                  <img src={fromImageToUrl(product.image)} />
+                </ProductColImage>
+                <ProductCol>
+                  {product.name} {product.price}
+                </ProductCol>
+              </ProductRow>
+            </a>
+          </Link>
         </Product>
       ))}
     </div>
