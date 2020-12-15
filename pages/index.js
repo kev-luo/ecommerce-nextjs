@@ -24,7 +24,7 @@ export default function Home({ products }) {
             <a>
               <ProductRow>
                 <ProductColImage>
-                  <img src={fromImageToUrl(product.image)} />
+                  <img src={fromImageToUrl(product.image)} alt="jersey"/>
                 </ProductColImage>
                 <ProductCol>
                   {product.name} ${twoDecimals(product.price)}

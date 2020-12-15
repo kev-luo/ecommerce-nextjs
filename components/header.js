@@ -1,11 +1,15 @@
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
-import { StyledHeader } from "../styles/Header";
+import { Nav, StyledHeader, Back } from "../styles/Header";
 
 export default function Header() {
+  const router = useRouter();
+  const isHome = router.pathname === "/"
   return (
-    <div>
+    <Nav>
+      {!isHome && <Back onClick={() => router.back()}>Back</Back>}
       <StyledHeader>
         <Link href="/">
           <a>
@@ -13,6 +17,6 @@ export default function Header() {
           </a>
         </Link>
       </StyledHeader>
-    </div>
+    </Nav>
   );
 }
