@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { BiUser } from "react-icons/bi";
 
 import { Nav, StyledHeader, Back, AuthLinks } from "../styles/Header";
 import { useAuthContext } from "../context/AuthContext";
@@ -22,7 +23,7 @@ export default function Header() {
       <AuthLinks>
         {user ? (
           <Link href="/account">
-            <a>{user.email}</a>
+            <a><BiUser /></a>
           </Link>
         ) : (
           <Link href="/login">

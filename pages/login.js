@@ -2,6 +2,7 @@ import { useState } from "react";
 import Head from "next/head";
 
 import { useAuthContext } from "../context/AuthContext";
+import { Input, Button } from "../styles/Login";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -20,13 +21,13 @@ export default function Login() {
       </Head>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        <input
+        <Input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="user@email.com"
         />
-        <button type="submit">Login</button>
+        <Button type="submit">Login</Button>
       </form>
     </div>
   );
