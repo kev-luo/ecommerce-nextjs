@@ -7,7 +7,7 @@ import { useOrders } from "../utils/useOrders";
 export default function Account() {
   const { user, logoutUser, getToken } = useAuthContext();
 
-  const orders = useOrders(user, getToken);
+  const { orders, loading } = useOrders(user, getToken);
   
   console.log("Account.render orders", orders);
 
@@ -32,10 +32,12 @@ export default function Account() {
         />
       </Head>
       <h2>Account Page</h2>
+
       <h3>Your Orders</h3>
+      {loading && <p>Loading your orders...</p>}
       {orders.map(order => (
         <div key={order.id}>
-          {order.product.name} ${order.total}
+          {new Date(order.created_at).toLocaleDateString('en-EN')} {order.product.name} ${order.total} {order.status}
         </div>
       ))}
       <p>Logged in as {user.email}</p>
