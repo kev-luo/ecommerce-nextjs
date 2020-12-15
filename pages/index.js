@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+import axios from "axios";
 
 import {
   Product,
@@ -7,10 +8,11 @@ import {
   ProductColImage,
   ProductCol,
 } from "../styles/Home";
-import products from "../products.json";
-import { fromImageToUrl } from "../utils/urls";
+// import products from "../products.json";
+import { fromImageToUrl, API_URL } from "../utils/urls";
+import { twoDecimals } from "../utils/format";
 
-export default function Home() {
+export default function Home({ products }) {
   return (
     <div>
       <Head>
@@ -26,7 +28,7 @@ export default function Home() {
                   <img src={fromImageToUrl(product.image)} />
                 </ProductColImage>
                 <ProductCol>
-                  {product.name} {product.price}
+                  {product.name} ${twoDecimals(product.price)}
                 </ProductCol>
               </ProductRow>
             </a>
@@ -35,4 +37,13 @@ export default function Home() {
       ))}
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const {data: products} = await axios.get(`${API_URL}/products/`)
+  return {
+    props: {
+      products
+    }
+  }
 }
