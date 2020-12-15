@@ -21,7 +21,7 @@ export default function Header() {
       </StyledHeader>
       <AuthLinks>
         {user ? (
-          <Link href="/acount">
+          <Link href="/account">
             <a>{user.email}</a>
           </Link>
         ) : (
