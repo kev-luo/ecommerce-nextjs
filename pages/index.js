@@ -8,7 +8,6 @@ import {
   ProductColImage,
   ProductCol,
 } from "../styles/Home";
-// import products from "../products.json";
 import { fromImageToUrl, API_URL } from "../utils/urls";
 import { twoDecimals } from "../utils/format";
 
