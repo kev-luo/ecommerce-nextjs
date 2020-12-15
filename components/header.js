@@ -16,7 +16,7 @@ export default function Header() {
       <StyledHeader>
         <Link href="/">
           <a>
-            <h1>E-Commerce</h1>
+            <h1>Tottenham Hotspur Jerseys!</h1>
           </a>
         </Link>
       </StyledHeader>
