@@ -1,21 +1,40 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 import { useRouter } from "next/router";
+import { Magic } from "magic-sdk";
+import { MAGIC_PUBLIC_KEY } from "../utils/urls";
 
 const AuthContext = createContext();
+
+let magic;
 
 export const AuthProvider = (props) => {
   const [user, setUser] = useState(null);
   const router = useRouter();
 
   const loginUser = async (email) => {
-    setUser({ email });
-    router.push("/");
+    try {
+      await magic.auth.loginWithMagicLink({ email })
+      setUser({ email })
+      router.push("/");
+    } catch (err) {
+      setUser(null);
+      console.log(err);
+    }
   };
 
   const logoutUser = async () => {
-    setUser(null);
-    router.push("/");
+    try {
+      await magic.user.logout()
+      setUser(null);
+      router.push("/");
+    } catch(err) {
+      console.log(err);
+    }
   };
+
+  useEffect(() => {
+    magic = new Magic(MAGIC_PUBLIC_KEY);
+  });
 
   return (
     <AuthContext.Provider value={{ user, loginUser, logoutUser }}>
