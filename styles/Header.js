@@ -16,3 +16,9 @@ export const Back = styled.div`
   line-height: 24px;
   cursor: pointer;
 `
+
+export const AuthLinks = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+`

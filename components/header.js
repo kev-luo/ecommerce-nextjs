@@ -2,9 +2,11 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { Nav, StyledHeader, Back } from "../styles/Header";
+import { Nav, StyledHeader, Back, AuthLinks } from "../styles/Header";
+import { useAuthContext } from "../context/AuthContext";
 
 export default function Header() {
+  const { user } = useAuthContext();
   const router = useRouter();
   const isHome = router.pathname === "/"
   return (
@@ -17,6 +19,17 @@ export default function Header() {
           </a>
         </Link>
       </StyledHeader>
+      <AuthLinks>
+        {user ? (
+          <Link href="/acount">
+            <a>{user.email}</a>
+          </Link>
+        ) : (
+          <Link href="/login">
+            <a>Login</a>
+          </Link>
+        )}
+      </AuthLinks>
     </Nav>
   );
 }
