@@ -3,6 +3,7 @@ import axios from "axios";
 
 import { fromImageToUrl, API_URL } from "../../utils/urls";
 import { twoDecimals } from "../../utils/format";
+import BuyButton from "../../components/buyButton";
 
 export default function Product({ product }) {
   return (
@@ -17,7 +18,10 @@ export default function Product({ product }) {
         <h3>{product.name}</h3>
         <img src={fromImageToUrl(product.image)} />
         <h3>{product.name}</h3>
-        <p>${twoDecimals(product.price)}</p>
+        <p>
+          ${twoDecimals(product.price)}
+          <BuyButton product={product} />
+        </p>
         <p>{product.content}</p>
       </div>
     </>
@@ -30,7 +34,7 @@ export async function getStaticProps({ params: { slug } }) {
   );
   return {
     props: {
-      product: product[0]
+      product: product[0],
     },
   };
 }
@@ -43,4 +47,3 @@ export async function getStaticPaths() {
     fallback: false,
   };
 }
-
