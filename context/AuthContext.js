@@ -44,13 +44,23 @@ export const AuthProvider = (props) => {
     }
   }
 
+  const getToken = async () => {
+    // retrieves Magic issued bearer token to allow user to make authenticated requests
+    try {
+      const token = await magic.user.getIdToken()
+      return token
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
   useEffect(() => {
     magic = new Magic(MAGIC_PUBLIC_KEY);
     checkUserLoggedIn()
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, loginUser, logoutUser }}>
+    <AuthContext.Provider value={{ user, loginUser, logoutUser, getToken }}>
       {props.children}
     </AuthContext.Provider>
   );
